@@ -12,11 +12,12 @@ Los caracteres en C se representan con un valor ASCII correspondiente, los cuale
 'a' = 97     → 'z' = 122  
 'Diferencia = 32'
 
+Los caracteres con acentos no son contados por el programa
 */
 #include <stdio.h>
 
 int main(){
-    #define MAX_LONGITUD 25 // Longitud maxima del array, representa la cantidad de letras del abecedario (sin ñ) 
+    #define MAX_LONGITUD 26 // Tamaño maximo del array, representa la cantidad de letras del abecedario (sin ñ) 
     int histograma[MAX_LONGITUD];
     int c;
 
@@ -30,12 +31,15 @@ int main(){
                 c = c + 32;
             }
             ++histograma[c - 'a'];          //Incrementa el valor almacenado, donde el indice representa cada caracter
-        }                                    // siendo a = 0, b = 1, ..., z = 24
+        }                                    // siendo a = 0, b = 1, ..., z = 25
     }
-
-    for (int i = 0; i < MAX_LONGITUD; ++i){
-        printf(" %d", histograma[i]);
+    int i,j;
+    for (i = 0; i < MAX_LONGITUD; ++i){
+        printf("%c: ", 'a' + i);
+        for (j = 0; j < histograma[i]; ++j){
+            printf("#");
+        }
+        printf(" (%d)\n", histograma[i]);
     }
-    printf("\n");
     return 0;
 }
